@@ -1,0 +1,303 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    font-family: "SF Pro Display", sans-serif;
+    overflow-x: hidden;
+}
+
+body {
+    background: linear-gradient(180deg, #dfe4ea, #f7f9fb);
+    color: #111;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    transition: background 0.5s ease, color 0.5s ease;
+}
+
+body.dark {
+    background: radial-gradient(ellipse at top, #1a1a1a, #050505);
+    color: #f2f2f2;
+}
+
+button {
+    border: none;
+    border-radius: 12px;
+    padding: 10px 18px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    background: linear-gradient(145deg, #e2e2e2, #c0c0c0);
+    color: #222;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.25s cubic-bezier(0.25, 1, 0.3, 1);
+}
+
+button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+button:active {
+    transform: scale(0.97);
+}
+
+body.dark button {
+    background: linear-gradient(145deg, #333, #444);
+    color: #f1f1f1;
+}
+
+.glass-card {
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    background: rgba(255, 255, 255, 0.45);
+    border-radius: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    max-width: 1000px;
+    width: 100%;
+}
+
+body.dark .glass-card {
+    background: rgba(40, 40, 40, 0.45);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.panel-container {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.main-panel {
+    flex: 2;
+    min-width: 300px;
+}
+
+.transactions-panel {
+    flex: 1;
+    min-width: 250px;
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+h1 {
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+#summary {
+    text-align: center;
+    color: #555;
+    margin-bottom: 1rem;
+}
+
+body.dark #summary {
+    color: #ccc;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+canvas#chart {
+    display: block;
+    margin: 0 auto 1rem;
+    max-width: 220px;
+    max-height: 220px;
+}
+
+/* --- Transactions --- */
+#transactions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.transaction {
+    backdrop-filter: blur(8px);
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.transaction:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+body.dark .transaction {
+    background: rgba(40, 40, 40, 0.6);
+}
+
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+    z-index: 9998;
+}
+
+.modal.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 20px;
+    padding: 1.5rem;
+    max-width: 420px;
+    width: 90%;
+    transform: scale(0.9);
+    animation: modalPop 0.4s ease forwards;
+}
+
+body.dark .modal-content {
+    background: rgba(40, 40, 40, 0.7);
+    color: #fff;
+}
+
+@keyframes modalPop {
+    0% {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+    60% {
+        transform: scale(1.05);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.modal-buttons button {
+    flex: 1;
+    border-radius: 10px;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 0.6rem;
+    margin-top: 0.6rem;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    background: rgba(255, 255, 255, 0.5);
+    font-size: 1rem;
+    resize: none;
+}
+
+body.dark input, body.dark textarea {
+    background: rgba(60, 60, 60, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+}
+
+
+.stars, .stars::after {
+    content: "";
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: #fff;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.stars {
+    background: transparent;
+}
+
+.shooting-star {
+    position: absolute;
+    width: 2px;
+    height: 80px;
+    background: linear-gradient(45deg, white, transparent);
+    top: 10%;
+    left: 20%;
+    transform: rotate(45deg);
+    animation: shoot 2s linear infinite;
+}
+
+@keyframes shoot {
+    0% {
+        transform: translateX(0) translateY(0) rotate(45deg);
+    }
+    100% {
+        transform: translateX(500px) translateY(200px) rotate(45deg);
+    }
+}
+
+.transaction span:last-child {
+    display: flex;
+    gap: 4px;
+}
+
+/* Custom scrollbar for panels or transactions */
+.transactions-panel::-webkit-scrollbar {
+    width: 8px;               /* width of the scrollbar */
+}
+
+.transactions-panel::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);  /* track background */
+    border-radius: 10px;
+}
+
+.transactions-panel::-webkit-scrollbar-thumb {
+    background: rgba(100, 100, 100, 0.3); /* the draggable thumb */
+    border-radius: 10px;
+    transition: background 0.3s;
+}
+
+.transactions-panel::-webkit-scrollbar-thumb:hover {
+    background: rgba(100, 100, 100, 0.6); /* hover effect */
+}
+
+/* For Firefox */
+.transactions-panel {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(100,100,100,0.3) rgba(0,0,0,0.05);
+}
+
+body {
+  user-select: none;
+  -webkit-user-select: none; /* For older WebKit browsers like Safari */
+  -moz-user-select: none;    /* For older Firefox browsers */
+  -ms-user-select: none;     /* For older Internet Explorer/Edge */
+}
